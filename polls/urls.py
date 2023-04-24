@@ -11,4 +11,6 @@ urlpatterns = [
     path('redis/<str:key>', views.redis, name='redis'),
     path('redis/<str:key>/<str:value>', views.redis_add, name='redis_add'),
     path('openid', views.openid, name='openid'),
+    path('https', views.https, name='https'),
+    path('http', views.http, name='http'),
 ]

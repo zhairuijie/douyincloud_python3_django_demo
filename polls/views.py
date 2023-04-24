@@ -1,3 +1,5 @@
+import json
+
 from django.http import HttpResponse, Http404, JsonResponse, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import get_object_or_404, render
@@ -6,6 +8,7 @@ from django.core.cache import cache
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 import logging
+import requests
 
 logger = logging.getLogger('polls')
 
@@ -75,3 +78,34 @@ def openid(request):
         }
     }
     return JsonResponse(result_data)
+
+@csrf_exempt
+def https(request):
+    url = "https://developer.toutiao.com/api/apps/qrcode"
+
+    payload = json.dumps({
+        "appname": "douyin"
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
+
+
+@csrf_exempt
+def http(request):
+    url = "http://developer.toutiao.com/api/apps/qrcode"
+
+    payload = json.dumps({
+        "appname": "douyin"
+    })
+    headers = {
+        'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
