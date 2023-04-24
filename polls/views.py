@@ -95,6 +95,7 @@ def https(request):
     response = requests.request("POST", url, headers=headers, data=payload)
 
     print(response.text)
+    return response.text
 
 
 @csrf_exempt
@@ -111,3 +112,4 @@ def http(request):
     response = requests.request("POST", url, headers=headers, data=payload)
 
     print(response.text)
+    return response.text
