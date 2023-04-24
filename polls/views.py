@@ -82,17 +82,17 @@ def openid(request):
 
 @csrf_exempt
 def https(request):
-    url = "https://developer.toutiao.com/api/apps/qrcode"
-
+    conn = https.client.HTTPSConnection("developer.toutiao.com")
     payload = json.dumps({
         "appname": "douyin"
     })
     headers = {
         'Content-Type': 'application/json'
     }
-
-    response = requests.request("POST", url, headers=headers, data=payload)
-    print(response.text)
+    conn.request("POST", "/api/apps/qrcode", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    print(data.decode("utf-8"))
 
 
 @csrf_exempt
