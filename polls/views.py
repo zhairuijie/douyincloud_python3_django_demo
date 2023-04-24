@@ -1,4 +1,6 @@
 import json
+import logging
+import requests
 
 from django.http import HttpResponse, Http404, JsonResponse, HttpResponseRedirect
 from django.template import loader
@@ -7,8 +9,7 @@ from .models import Question, Choice
 from django.core.cache import cache
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-import logging
-import requests
+
 
 logger = logging.getLogger('polls')
 
