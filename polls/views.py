@@ -9,6 +9,7 @@ from .models import Question, Choice
 from django.core.cache import cache
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+import http.client
 
 
 logger = logging.getLogger('polls')
@@ -81,22 +82,23 @@ def openid(request):
     return JsonResponse(result_data)
 
 @csrf_exempt
-def https(request):
-    conn = https.client.HTTPSConnection("developer.toutiao.com")
+def https1(request):
+    url = "https://developer.toutiao.com/api/apps/qrcode"
+
     payload = json.dumps({
         "appname": "douyin"
     })
     headers = {
         'Content-Type': 'application/json'
     }
-    conn.request("POST", "/api/apps/qrcode", payload, headers)
-    res = conn.getresponse()
-    data = res.read()
-    print(data.decode("utf-8"))
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+
+    print(response.text)
 
 
 @csrf_exempt
-def http(request):
+def http1(request):
     conn = http.client.HTTPSConnection("developer.toutiao.com")
     payload = json.dumps({
         "appname": "douyin"
